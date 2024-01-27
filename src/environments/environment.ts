@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrl: 'https://www.dnd5eapi.co',
+  goldCoin: 'assets/goldCoin.svg',
+  silverCoin: 'assets/silverCoin.svg',
+  copperCoin: 'assets/copperCoin.svg',
+  weigthtIcon: 'assets/heavy.svg'
 };
 
 /*

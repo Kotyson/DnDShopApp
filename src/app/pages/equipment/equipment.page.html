@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-title>Equipment</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar
+      placeholder="Search equipment"
+      inputmode="text"
+      type="text"
+      [debounce]="500"
+      showCancelButton="focus"
+      autocorrect="on"
+      (ionInput)="searchChangeInput($event)"
+      animated="false"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card-subtitle class="ion-margin-top ion-margin-start">
+    Results: {{filteredEquipment.length}}
+  </ion-card-subtitle>
+  <ion-list>
+    <ion-item
+      button
+      *ngFor="let item of filteredEquipment | slice:0:itemsPerPage*currentPage; let i=index"
+      [routerLink]="[item.index,item.url]"
+    >
+      <ion-label>{{item.name}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll position="bottom" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

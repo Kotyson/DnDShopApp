@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-title>Detail</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<!-- Error
+<ion-content *ngIf="error.exists">
+  <ion-title class="ion-margin-top ion-text-center">Not Found</ion-title>
+</ion-content> -->
+<!-- {{Result.error.length}} -->
+<ion-content [fullscreen]="true" *ngIf="Result && !(Result.error)">
+  <!-- Header (name, equipment-category) -->
+  <ion-card-header>
+    <ion-card-title class="main-title"
+      >{{Result.name}}
+      <span *ngIf="Result.quantity"> ({{Result.quantity}}) </span>
+    </ion-card-title>
+    <ion-card-subtitle> {{Result.equipment_category.name}} </ion-card-subtitle>
+    <ion-card-subtitle>
+      <!-- Basic info (cost, weigth) -->
+      <span class="sub-detail" *ngIf="Result.cost">
+        <span class="text">{{Result.cost.quantity}}</span>
+        <ion-icon class="icon" src="{{coinUrl}}"></ion-icon>
+      </span>
+      <span class="sub-detail" *ngIf="Result.weight">
+        <span class="text">{{Result.weight}}</span>
+        <ion-icon color="dark" src="{{weightIconUrl}}"></ion-icon>
+      </span>
+    </ion-card-subtitle>
+  </ion-card-header>
+  <!-- Description (optional) -->
+  <ion-card *ngIf="Result.desc && Result.desc.length > 0">
+    <ion-card-header>
+      <ion-card-title>Description</ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngFor="let d of Result.desc"> {{d}} </ion-card-content>
+  </ion-card>
+</ion-content>
