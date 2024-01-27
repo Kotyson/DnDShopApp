@@ -36,6 +36,23 @@
     <ion-card-header>
       <ion-card-title>Description</ion-card-title>
     </ion-card-header>
-    <ion-card-content *ngFor="let d of Result.desc"> {{d}} </ion-card-content>
+    <!-- Content of description -->
+    <ion-card-content *ngFor="let d of Result.desc">
+      <!-- No table -->
+      <ion-card-content *ngIf="!isArr(d)"> {{d}} </ion-card-content>
+      <!-- Creating table -->
+      <ion-grid *ngIf="isArr(d)" class="dTable">
+        <!-- Header -->
+        <ion-row class="dHeader">
+          <ion-col class="dCell" *ngFor="let c of getHeaderFromTable(d)"
+            >{{c}}</ion-col
+          >
+        </ion-row>
+        <!-- Rows (ski) -->
+        <ion-row class="dRow" *ngFor="let ar of getRowsFromTable(d)">
+          <ion-col class="dCell" *ngFor="let s of ar"> {{s}} </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
   </ion-card>
 </ion-content>

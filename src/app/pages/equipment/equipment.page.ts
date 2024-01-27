@@ -33,6 +33,7 @@ export class EquipmentPage implements OnInit {
         console.log(this.magicEquipment);
         this.allEquipment = [...this.equipment, ...this.magicEquipment];
         this.filteredEquipment = this.allEquipment;
+        this.filteredEquipment.sort((a, b) => (a.index < b.index) ? -1 : (a.index > b.index) ? 1 : 0);
       });
     });
 
@@ -42,7 +43,13 @@ export class EquipmentPage implements OnInit {
     console.log(this.allEquipment)
     const query = event.target.value.toLowerCase();
     this.filteredEquipment = this.allEquipment.filter((d) => d.index.toLowerCase().indexOf(query) > -1);
+    // Sort a-z
+    this.filteredEquipment.sort((a, b) => (a.index < b.index) ? -1 : (a.index > b.index) ? 1 : 0);
     console.log(this.filteredEquipment)
+  }
+
+  sortByAlphabet() {
+
   }
 
   async loadMore(event: InfiniteScrollCustomEvent) {

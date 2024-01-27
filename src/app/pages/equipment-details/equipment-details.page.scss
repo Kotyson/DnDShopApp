@@ -21,3 +21,20 @@
 .sub-detail span:first-child{
     margin-right: 2px;
 }
+
+// Table
+.dTable{
+    padding: 0;
+}
+
+.dCell{
+    margin:2px;
+    background-color: var(--ion-color-light-shade);
+    text-align: center;
+}
+
+.dHeader .dCell{
+    color: var(--ion-color-success-contrast);
+    background-color: var(--ion-color-success-shade);
+    font-weight: bold;
+}

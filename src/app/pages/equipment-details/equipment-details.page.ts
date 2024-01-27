@@ -26,35 +26,22 @@ export class EquipmentDetailsPage implements OnInit {
     this.Result.range = Object();
 
     const itemUrl = this.route.snapshot.paramMap.get('id2');
-    // this.route.paramMap.subscribe(params => {
-    //   let id1 = params.get('id1');
-    //   let id2 = params.get('id2');
-    // });
-    console.log(itemUrl);
     if (itemUrl != null) {
       this.equipmentService.getEquipmentDetail(itemUrl).subscribe({
         next: (res) => {
           console.log(res)
           this.Result = res
-          console.log(this.Result.error)
           if (this.Result.cost) {
             this.setCoinImage();
+          }
+          if (this.Result.desc) {
+            this.Result.desc = this.restructureDescWithTables(this.Result.desc);
           }
         },
         error: (e: Error) => {
           console.log("Error " + e.message);
         }
       });
-      // this.equipmentService.getEquipmentDetail("magic-items/" + id).subscribe({
-      //   next: (res) => {
-      //     console.log(res)
-      //     this.Result = res
-      //     console.log(this.Result.error)
-      //   },
-      //   error: (e: Error) => {
-      //     console.log("Error " + e.message);
-      //   }
-      // });
 
     }
 
@@ -76,4 +63,63 @@ export class EquipmentDetailsPage implements OnInit {
     }
   }
 
+  // Table manipulation
+  isArr(data: any) {
+    return Array.isArray(data);
+  }
+
+  isItTable(data: string): boolean {
+    let regex = /\|([^|]+)\|/g;
+    return regex.test(data);
+  }
+
+  getTableRow(data: string) {
+    let row = data.split('|');
+    row = row.map(d => d.trim());
+    row = row.filter(n => n);
+    console.log("Cells: " + row);
+    return row;
+  }
+
+  restructureDescWithTables(desc: Array<string>): Array<any> {
+    let newDesc: Array<any> = []
+    let table: Array<Array<string>> = []
+    console.log("Old");
+    console.log(desc)
+    for (let element of desc) {
+      if (this.isItTable(element)) {
+        table.push(this.getTableRow(element));
+      } else {
+        if (table.length > 0) {
+          let head = table.shift();
+          table.shift();
+          if (head) {
+            table.unshift(head);
+          }
+          newDesc.push(table);
+          table = []
+        }
+        newDesc.push(element);
+      }
+    }
+    if (table.length > 0) {
+      let head = table.shift();
+      table.shift();
+      if (head) {
+        table.unshift(head);
+      }
+      newDesc.push(table);
+    }
+    console.log("New");
+    console.log(newDesc);
+    return newDesc;
+  }
+
+  getHeaderFromTable(data: any) {
+    return data[0];
+  }
+
+  getRowsFromTable(data: Array<Array<any>>) {
+    return data.slice(1);
+  }
 }
