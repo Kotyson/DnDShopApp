@@ -97,4 +97,8 @@ export class DndEquipmentService {
   getAllMagicitems(): Observable<Root> {
     return this.http.get<Root>(`${environment.baseUrl}/api/magic-items`);
   }
+
+  getEquipment(url: string): Observable<Root> {
+    return this.http.get<Root>(`${environment.baseUrl}${url}`);
+  }
 }

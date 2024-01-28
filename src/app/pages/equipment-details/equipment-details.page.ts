@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Detail, DndEquipmentService, Root } from 'src/app/services/dnd-equipment.service';
+import { Detail, DndEquipmentService, Result, Root } from 'src/app/services/dnd-equipment.service';
 import { environment } from 'src/environments/environment';
+import { DndStorageService } from 'src/app/services/dnd-storage.service';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-equipment-details',
@@ -13,10 +15,12 @@ export class EquipmentDetailsPage implements OnInit {
   coinUrl = environment.goldCoin;
   weightIconUrl = environment.weigthtIcon;
 
-  constructor(private route: ActivatedRoute, private equipmentService: DndEquipmentService) {
+  constructor(private route: ActivatedRoute, private equipmentService: DndEquipmentService, private dndStorage: DndStorageService, private storage: Storage) {
   }
 
   ngOnInit() {
+    this.storage.create();
+    this.dndStorage.start();
     this.Result.cost = Object();
     this.Result.damage = Object();
     this.Result.damage.damage_type = Object();
@@ -45,6 +49,18 @@ export class EquipmentDetailsPage implements OnInit {
 
     }
 
+  }
+
+  addToFavourite() {
+    this.dndStorage.setData(this.Result.url);
+  }
+
+  getFromFavourite() {
+    this.dndStorage.getData();
+  }
+
+  clearFav() {
+    this.dndStorage.clearData();
   }
 
   setCoinImage() {

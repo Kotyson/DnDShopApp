@@ -12,6 +12,22 @@
 </ion-content> -->
 <!-- {{Result.error.length}} -->
 <ion-content [fullscreen]="true" *ngIf="Result && !(Result.error)">
+  <ion-fab slot="fixed" vertical="top" horizontal="end" [edge]="true">
+    <ion-fab-button>
+      <ion-icon name="chevron-down-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="bottom">
+      <ion-fab-button (click)="addToFavourite()">
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="getFromFavourite()">
+        <ion-icon name="book"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="clearFav()">
+        <ion-icon name="bubbles"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
   <!-- Header (name, equipment-category) -->
   <ion-card-header>
     <ion-card-title class="main-title"

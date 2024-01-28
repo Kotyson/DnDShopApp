@@ -1,13 +1,40 @@
 <ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-title>Favourite</ion-title>
+  </ion-toolbar>
   <ion-toolbar>
-    <ion-title>favourites</ion-title>
+    <ion-searchbar
+      placeholder="Search favourite..."
+      inputmode="text"
+      type="text"
+      [debounce]="500"
+      showCancelButton="focus"
+      autocorrect="on"
+      (ionInput)="null"
+      animated="false"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">favourites</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card-subtitle class="ion-margin-top ion-margin-start">
+    <!-- Results: {{filteredEquipment.length}} -->
+  </ion-card-subtitle>
+  <ion-list>
+    <!-- <ion-item
+      button
+      *ngFor="let item of filteredEquipment | slice:0:itemsPerPage*currentPage; let i=index"
+      [routerLink]="[item.index,item.url]"
+    >
+      <ion-label>{{item.name}}</ion-label>
+    </ion-item> -->
+  </ion-list>
+
+  <!-- <ion-infinite-scroll position="bottom" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
 </ion-content>
