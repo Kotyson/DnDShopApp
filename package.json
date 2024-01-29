@@ -1,7 +1,7 @@
 {
   "name": "DnD_project",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "version": "1.0.0",
+  "author": "Kotyson",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -62,5 +62,5 @@
     "ts-node": "^8.3.0",
     "typescript": "~5.2.2"
   },
-  "description": "An Ionic project"
+  "description": "Dnd equipment searcher"
 }
