@@ -19,6 +19,11 @@ const routes: Routes = [
       {
         path: 'favourites',
         loadChildren: () => import('../favourites/favourites.module').then(m => m.FavouritesPageModule)
+      },
+      {
+        path: 'favourites/:id1/:id2',
+        redirectTo: 'equipment/:id1/:id2',
+        // loadChildren: () => import('../favourites/favourites.module').then(m => m.FavouritesPageModule)
       }
     ]
   }

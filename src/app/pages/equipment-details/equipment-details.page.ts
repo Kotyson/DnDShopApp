@@ -4,6 +4,7 @@ import { Detail, DndEquipmentService, Result, Root } from 'src/app/services/dnd-
 import { environment } from 'src/environments/environment';
 import { DndStorageService } from 'src/app/services/dnd-storage.service';
 import { Storage } from '@ionic/storage-angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-equipment-details',
@@ -15,7 +16,7 @@ export class EquipmentDetailsPage implements OnInit {
   coinUrl = environment.goldCoin;
   weightIconUrl = environment.weigthtIcon;
 
-  constructor(private route: ActivatedRoute, private equipmentService: DndEquipmentService, private dndStorage: DndStorageService, private storage: Storage) {
+  constructor(private route: ActivatedRoute, private equipmentService: DndEquipmentService, private dndStorage: DndStorageService, private storage: Storage, private alertController: AlertController) {
   }
 
   ngOnInit() {
@@ -51,8 +52,25 @@ export class EquipmentDetailsPage implements OnInit {
 
   }
 
+  async presentAlert(name: string, message: string) {
+    const alert = await this.alertController.create({
+      header: name + ' ' + message,
+      // subHeader: 'A Sub Header Is Optional',
+      // message: 'A message should be a short, complete sentence.',
+      buttons: ['Done'],
+    });
+
+    await alert.present();
+  }
+
   addToFavourite() {
-    this.dndStorage.setData(this.Result.url);
+    if (this.dndStorage.isInStorage(this.Result)) {
+      this.presentAlert(this.Result.name, " removed from favourites!");
+    } else {
+      this.presentAlert(this.Result.name, " added to favourites!");
+    }
+    this.dndStorage.setData(this.Result);
+
   }
 
   getFromFavourite() {
