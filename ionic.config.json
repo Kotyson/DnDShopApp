@@ -1,7 +1,8 @@
 {
-  "name": "DnD_project",
+  "name": "DnD Finder",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

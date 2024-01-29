@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
-  appName: 'DnD_project',
+  appName: 'DnD Finder',
   webDir: 'www',
   server: {
     androidScheme: 'https'
